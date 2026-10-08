@@ -1,0 +1,55 @@
+RD RESULTS (confirmatory)
+========================================
+
+Primary: jump in next score at the cutoff (local linear, triangular, h = 5, clustered by property)
+  cutoff 80: -0.66 (se 0.58; 95% CI -1.80 to +0.47); p = 0.2525; Holm p = 0.5050; n = 10,993
+     first stage +1.084 years (se 0.024); fuzzy estimate per additional year -0.61 (se 0.54)
+  cutoff 90: -0.33 (se 0.46; 95% CI -1.23 to +0.56); p = 0.4677; Holm p = 0.5050; n = 15,183
+     first stage +0.994 years (se 0.022); fuzzy estimate per additional year -0.33 (se 0.46)
+
+Secondary outcomes (h = 5)
+  next_fail, cutoff 80: +0.021 (se 0.011); p = 0.0630; n = 10,993
+  next_fail, cutoff 90: +0.005 (se 0.008); p = 0.5350; n = 15,183
+  score_21m, cutoff 80: +0.502 (se 0.612); p = 0.4120; n = 10,595
+  score_21m, cutoff 90: -0.363 (se 0.455); p = 0.4253; n = 15,170
+  has_next, cutoff 80: -0.035 (se 0.010); p = 0.0003; n = 11,782
+  has_next, cutoff 90: -0.040 (se 0.010); p = 0.0000; n = 16,724
+
+Robustness of the primary estimates
+  cutoff 80, h = 3: -0.25 (se 0.75)
+  cutoff 80, h = 8: -1.37 (se 0.46)
+  cutoff 80, local quadratic, h = 8: -0.13 (se 0.67)
+  cutoff 80, donut 0.5: -0.96 (se 0.73)
+  cutoff 80, donut 1: -1.56 (se 0.96)
+  cutoff 80, excluding a property's first listed inspection: -0.62 (se 0.72)
+  cutoff 90, h = 3: -0.18 (se 0.58)
+  cutoff 90, h = 8: -0.72 (se 0.37)
+  cutoff 90, local quadratic, h = 8: -0.21 (se 0.53)
+  cutoff 90, donut 0.5: -0.32 (se 0.59)
+  cutoff 90, donut 1: -0.22 (se 0.78)
+  cutoff 90, excluding a property's first listed inspection: -0.65 (se 0.63)
+
+Attrition and trimming bounds (h = 5)
+  cutoff 80: attrition jump -0.035 (se 0.010); trim share 0.036; bounds [-2.28, +0.10]; 95% interval for the bounds [-3.33, +1.24]
+  cutoff 90: attrition jump -0.040 (se 0.010); trim share 0.043; bounds [-1.88, +0.40]; 95% interval for the bounds [-2.70, +1.30]
+
+Validity checks
+  density at 80: log ratio +0.056 (se 0.037, z = +1.53)
+  balance, prev_score_hist at 80: -0.632 (se 0.720); p = 0.380
+  balance, index_year at 80: -0.026 (se 0.055); p = 0.637
+  balance, index_month at 80: +0.130 (se 0.128); p = 0.311
+  balance, seq_hist at 80: -0.040 (se 0.041); p = 0.332
+  density at 90: log ratio +0.001 (se 0.031, z = +0.04)
+  balance, prev_score_hist at 90: +0.566 (se 0.609); p = 0.352
+  balance, index_year at 90: +0.039 (se 0.045); p = 0.387
+  balance, index_month at 90: +0.059 (se 0.106); p = 0.575
+  balance, seq_hist at 90: -0.006 (se 0.030); p = 0.833
+  placebo cutoff 74.5: -0.16 (se 0.72); p = 0.820
+  placebo cutoff 84.5: -0.27 (se 0.60); p = 0.652
+  placebo cutoff 94.5: +0.02 (se 0.47); p = 0.973
+
+rdrobust: MSE-optimal bandwidth, triangular kernel, local linear, clustered by property
+  cutoff 80: h = 3.69; conventional -0.36; bias-corrected -0.10; robust 95% CI -1.62 to +1.42; robust p = 0.8949
+  rddensity at 80: t = +2.34, p = 0.0194
+  cutoff 90: h = 3.36; conventional -0.18; bias-corrected -0.02; robust 95% CI -1.28 to +1.25; robust p = 0.9774
+  rddensity at 90: t = -0.42, p = 0.6737
