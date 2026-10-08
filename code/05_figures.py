@@ -65,4 +65,8 @@ for ax, key, title in ((axes[0], "nspire_MF", "(a) Multifamily, NSPIRE"), (axes[
     ax.plot(g, b["counterfactual"], color=ORANGE, linewidth=1.5, label="Counterfactual"); ax.axvspan(54.5, 72.5, color=GRID, alpha=0.5, linewidth=0)
     ax.set_title(title); ax.set_xlabel("Inspection score"); grid(ax)
 axes[0].set_ylabel("Inspections"); axes[0].legend(frameon=False, loc="upper left"); fig.tight_layout(w_pad=1.0); fig.savefig(os.path.join(F, "bunching.pdf")); plt.close(fig)
+# column-width density figure for the two-column article
+fig, ax = plt.subplots(figsize=(3.45, 2.1)); x = p.inspection_score.values; e = np.arange(50, 100.01, 0.5)
+ax.hist(x, bins=e, color=BLUE, linewidth=0); [ax.axvline(c, color=MUTED, linestyle=(0, (3, 3)), linewidth=0.7) for c in (59.5, 79.5, 89.5)]
+ax.set_xlabel("Index inspection score (0.5-point bins)"); ax.set_ylabel("Index inspections"); grid(ax); fig.savefig(os.path.join(F, "density_col.pdf")); plt.close(fig)
 print("figures written")

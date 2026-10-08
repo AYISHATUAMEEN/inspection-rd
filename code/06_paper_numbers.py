@@ -9,7 +9,7 @@ RD = json.load(open(os.path.join(O, "rd_results.json"))); BU = json.load(open(os
 N = {}
 def neg(s): return "$-$" + s[1:] if s.startswith("-") else s
 f = lambda v, d=2: neg(f"{v:.{d}f}"); fs = lambda v, d=2: neg(f"{v:+.{d}f}") if v < 0 else f"+{v:.{d}f}"
-c = lambda v: f"{int(round(v)):,}"
+c = lambda v: neg(f"{int(round(v)):,}")
 def put(k, v): assert re.fullmatch(r"[A-Za-z]+", k), k; N[k] = v
 W = {"80": "Eighty", "90": "Ninety"}
 for k in ("80", "90"):
@@ -87,6 +87,46 @@ with open(os.path.join(T, "summary.tex"), "w") as fh:
     for lab, s in rows: fh.write(f"{lab} & {c(len(s))} & {f(s.mean())} & {f(s.std())} & {f(s.quantile(.1))} & {f(s.quantile(.9))} \\\\\n")
     fh.write(f"Share below 60 at index & {c(len(p))} & {f(100*(p.inspection_score < 59.5).mean(),1)}\\% & & & \\\\\nShare 80 or above at index & {c(len(p))} & {f(100*(p.inspection_score >= 79.5).mean(),1)}\\% & & & \\\\\nShare 90 or above at index & {c(len(p))} & {f(100*(p.inspection_score >= 89.5).mean(),1)}\\% & & & \\\\\n")
     fh.write("\\bottomrule\n\\end{tabular}\n")
+# validity table: balance, placebo, density
+rows = []
+for cov, lab in (("prev_score_hist", "Previous score"), ("seq_hist", "Inspection sequence number"), ("index_year", "Index year"), ("index_month", "Index month")):
+    a8, a9 = RD["validity"][f"{cov}_80"], RD["validity"][f"{cov}_90"]
+    rows.append([lab, f"{fs(a8['jump'])} ({f(a8['se'])})", f(a8["p"], 2), f"{fs(a9['jump'])} ({f(a9['se'])})", f(a9["p"], 2)])
+a8, a9 = RD["secondary"]["has_next_80"], RD["secondary"]["has_next_90"]
+rows.append(["Next inspection listed (attrition)", f"{fs(a8['jump'], 3)} ({f(a8['se'], 3)})", f(a8["p"], 3), f"{fs(a9['jump'], 3)} ({f(a9['se'], 3)})", f(a9["p"], 3)])
+d8, d9 = RD["validity"]["density_80"], RD["validity"]["density_90"]
+rows.append(["Density, binned log ratio", f"{fs(d8['log_ratio'], 3)} ({f(d8['se'], 3)})", f(2 * stats.norm.sf(abs(d8['z'])), 3), f"{fs(d9['log_ratio'], 3)} ({f(d9['se'], 3)})", f(2 * stats.norm.sf(abs(d9['z'])), 3)])
+r8, r9 = RD["rddensity"]["80"], RD["rddensity"]["90"]
+rows.append(["Density, \\texttt{rddensity} $t$", fs(r8["t"]), f(r8["p"], 3), fs(r9["t"]), f(r9["p"], 3)])
+with open(os.path.join(T, "validity.tex"), "w") as fh:
+    fh.write("\\begin{tabular}{lrrrr}\n\\toprule\n& \\multicolumn{2}{c}{80 cutoff} & \\multicolumn{2}{c}{90 cutoff} \\\\\n\\cmidrule(lr){2-3}\\cmidrule(lr){4-5}\nOutcome & Jump (SE) & $p$ & Jump (SE) & $p$ \\\\\n\\midrule\n")
+    for r in rows: fh.write(" & ".join(r) + " \\\\\n")
+    fh.write("\\bottomrule\n\\end{tabular}\n")
+rows = []
+for cpl in ("74.5", "84.5", "94.5"):
+    o = RD["validity"][f"placebo_{cpl}"]; rows.append([cpl, f"{fs(o['jump'])} ({f(o['se'])})", f(o["p"], 2), c(o["n"])])
+with open(os.path.join(T, "placebo.tex"), "w") as fh:
+    fh.write("\\begin{tabular}{lrrr}\n\\toprule\nPlacebo cutoff & Jump (SE) & $p$ & $n$ \\\\\n\\midrule\n")
+    for r in rows: fh.write(" & ".join(r) + " \\\\\n")
+    fh.write("\\bottomrule\n\\end{tabular}\n")
+rows = []
+for sec, lab, mult, dd in (("next_fail", "Next inspection fails (pp)", 100, 1), ("score_21m", "Fixed-horizon score (points)", 1, 2)):
+    a8, a9 = RD["secondary"][f"{sec}_80"], RD["secondary"][f"{sec}_90"]
+    rows.append([lab, f"{fs(a8['jump'] * mult, dd)} ({f(a8['se'] * mult, dd)})", f(a8["p"], 3), c(a8["n"]), f"{fs(a9['jump'] * mult, dd)} ({f(a9['se'] * mult, dd)})", f(a9["p"], 3), c(a9["n"])])
+for k, lab in (("80", "Fuzzy: per additional year (points)"),):
+    pass
+a8, a9 = RD["primary"]["80"], RD["primary"]["90"]
+rows.append(["Fuzzy: points per additional year", f"{fs(a8['wald'])} ({f(a8['wald_se'])})", f(2 * stats.norm.sf(abs(a8['wald'] / a8['wald_se'])), 3), c(a8["n"]), f"{fs(a9['wald'])} ({f(a9['wald_se'])})", f(2 * stats.norm.sf(abs(a9['wald'] / a9['wald_se'])), 3), c(a9["n"])])
+with open(os.path.join(T, "secondary.tex"), "w") as fh:
+    fh.write("\\begin{tabular}{lrrrrrr}\n\\toprule\n& \\multicolumn{3}{c}{80 cutoff} & \\multicolumn{3}{c}{90 cutoff} \\\\\n\\cmidrule(lr){2-4}\\cmidrule(lr){5-7}\nOutcome & Jump (SE) & $p$ & $n$ & Jump (SE) & $p$ & $n$ \\\\\n\\midrule\n")
+    for r in rows: fh.write(" & ".join(r) + " \\\\\n")
+    fh.write("\\bottomrule\n\\end{tabular}\n")
+SIM = json.load(open(os.path.join(O, "simulation_tests.json")))
+with open(os.path.join(T, "simulation.tex"), "w") as fh:
+    fh.write("\\begin{tabular}{lll}\n\\toprule\nCheck & Result & Criterion met \\\\\n\\midrule\n")
+    for r in SIM: fh.write(f"{r['test'].capitalize().replace(' rd ', ' RD ')} & {r['detail'].replace('-', '$-$')} & {'yes' if r['pass'] else 'no'} \\\\\n")
+    fh.write("\\bottomrule\n\\end{tabular}\n")
+put("simAllPass", "all" if all(r["pass"] for r in SIM) else "not all")
 with open(os.path.join(P, "numbers.tex"), "w") as fh:
     for k, v in sorted(N.items()): fh.write(f"\\newcommand{{\\{k}}}{{{v}}}\n")
 json.dump(N, open(os.path.join(P, "paper_numbers.json"), "w"), indent=1); print(len(N), "macros")

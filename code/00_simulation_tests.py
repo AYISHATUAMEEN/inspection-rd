@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """00_simulation_tests.py - validate rdlib on synthetic data with known answers. Exits non-zero on failure."""
-import sys, numpy as np
+import sys, os, json, numpy as np
 import rdlib
-rng = np.random.default_rng(1); fails = []
-def check(name, ok, detail): print(("PASS " if ok else "FAIL ") + name + "  " + detail); (fails.append(name) if not ok else None)
+rng = np.random.default_rng(1); fails = []; REC = []
+def check(name, ok, detail): print(("PASS " if ok else "FAIL ") + name + "  " + detail); REC.append({"test": name, "pass": bool(ok), "detail": detail}); (fails.append(name) if not ok else None)
 
 # 1. sharp RD: coverage and unbiasedness with clustered data
 est, cover = [], 0; R = 400; tau = 2.0
@@ -38,4 +38,5 @@ for r in range(100):
     moved = m.sum(); s[m] = 59; b = rdlib.bunching(s, 40, 85, 55, 72, reps=20); errs.append((b["excess"] - moved) / moved); last = b
 check("bunching excess recovered", abs(np.mean(errs)) < 0.10, f"mean relative error {np.mean(errs):+.3f}")
 check("bunching excess equals missing under pure relocation", abs(last["excess_minus_missing"]) < 4 * max(last["excess_minus_missing_se"], 1) + 0.1 * last["excess"], f"{last['excess_minus_missing']:.0f} (se {last['excess_minus_missing_se']:.0f})")
+json.dump(REC, open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "output", "simulation_tests.json"), "w"), indent=1)
 print("ALL SIMULATION TESTS PASSED" if not fails else "FAILED: " + ", ".join(fails)); sys.exit(1 if fails else 0)

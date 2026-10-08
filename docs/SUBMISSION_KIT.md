@@ -4,7 +4,7 @@ Both platforms require you to submit personally. Do this only after you have rea
 
 ## Files
 
-- Paper: `paper/inspection_rd.pdf`
+- Paper: `paper/inspection_rd_article.pdf`
 - Abstract (plain text, about 250 words): `paper/abstract_plain.txt`
 
 ## Metadata (same for both)
@@ -19,7 +19,7 @@ Both platforms require you to submit personally. Do this only after you have rea
 ## SSRN (gives a DOI of the form 10.2139/ssrn.NNNNNNN)
 
 1. Sign in at https://www.ssrn.com (create a free account if needed) and go to **My Papers** > **Submit a paper**.
-2. Upload `inspection_rd.pdf`. Accept the copyright and distribution terms only after reading them; SSRN distributes the PDF publicly.
+2. Upload `inspection_rd_article.pdf`. Accept the copyright and distribution terms only after reading them; SSRN distributes the PDF publicly.
 3. Enter the title, abstract, keywords and JEL codes above. Add yourself as author with the affiliation above.
 4. Classification: choose Economics Research Network (ERN) and, if offered, eJournals covering urban economics, housing, regulation and public economics. SSRN's editors may adjust the classification.
 5. Submit. SSRN reviews the paper (often a few business days) before it appears and before the DOI is active.

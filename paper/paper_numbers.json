@@ -185,11 +185,11 @@
  "difZMf": "+0.10",
  "difPMf": "0.92",
  "excRatioMf": "7.0",
- "upcsExcMf": "-22",
+ "upcsExcMf": "$-$22",
  "upcsExcSeMf": "23",
  "upcsDifMf": "1,160",
  "upcsDifSeMf": "263",
- "upcsMisMf": "-1,182",
+ "upcsMisMf": "$-$1,182",
  "excPh": "273",
  "excSePh": "19",
  "misPh": "223",
@@ -203,7 +203,7 @@
  "upcsExcSePh": "16",
  "upcsDifPh": "464",
  "upcsDifSePh": "146",
- "upcsMisPh": "-451",
+ "upcsMisPh": "$-$451",
  "difPHolmMf": "0.95",
  "difPHolmPh": "0.95",
  "thrMfSixtyBelow": "$-$30",
@@ -217,5 +217,6 @@
  "thrPhEightyBelow": "$-$11",
  "thrPhEightyAbove": "10",
  "thrPhNinetyBelow": "$-$1",
- "thrPhNinetyAbove": "11"
+ "thrPhNinetyAbove": "11",
+ "simAllPass": "all"
 }
