@@ -94,6 +94,23 @@ for c in (74.5, 84.5, 94.5):
     o = est(p.next_score.values, c, 4.0); R["validity"][f"placebo_{c}"] = o
     L.append(f"  placebo cutoff {c}: {o['jump']:+.2f} (se {o['se']:.2f}); p = {o['p']:.3f}")
 
+# ---- data-driven bandwidth and robust bias-corrected inference (PAP 6.3), rdrobust / rddensity ---------------
+import warnings; warnings.filterwarnings("ignore")
+import rdpkgs
+R["software"] = rdpkgs.VERSIONS; R["rdrobust"] = {}; R["rddensity"] = {}
+L.append("\nrdrobust: MSE-optimal bandwidth, triangular kernel, local linear, clustered by property")
+for k, c in S.CUTOFFS.items():
+    ok = np.isfinite(p.next_score.values)
+    r = rdpkgs.rdrobust(y=p.next_score.values[ok], x=x[ok], c=c, kernel="triangular", p=1, cluster=cl[ok])
+    hh = float(r.bws.iloc[0, 0]); conv = float(r.coef.iloc[0, 0]); bc = float(r.coef.iloc[1, 0])
+    ci = [float(v) for v in r.ci.iloc[2].values]; pv = float(r.pv.iloc[2, 0])
+    R["rdrobust"][k] = {"h": hh, "conventional": conv, "bias_corrected": bc, "robust_ci": ci, "robust_p": pv, "n_eff": [int(v) for v in r.N_h]}
+    L.append(f"  cutoff {k}: h = {hh:.2f}; conventional {conv:+.2f}; bias-corrected {bc:+.2f}; robust 95% CI {ci[0]:+.2f} to {ci[1]:+.2f}; robust p = {pv:.4f}")
+    d = rdpkgs.rddensity(X=x, c=c)
+    tp = float(d.test["p_jk"]); tt = float(d.test["t_jk"])
+    R["rddensity"][k] = {"t": tt, "p": tp, "h_left": float(d.h["left"]) if hasattr(d, "h") and hasattr(d.h, "__getitem__") else None}
+    L.append(f"  rddensity at {k}: t = {tt:+.2f}, p = {tp:.4f}")
+
 # ---- binned means for the RD figures -------------------------------------------------------------------------------
 b = np.floor(x + 0.5); ok = p.next_score.notna().values
 R["bins"] = {int(k): [int(v["size"]), float(v["mean"])] for k, v in pd.DataFrame({"b": b[ok], "y": p.next_score.values[ok]}).groupby("b").y.agg(["size", "mean"]).loc[65:99].iterrows()}

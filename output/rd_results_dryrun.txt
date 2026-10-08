@@ -47,3 +47,9 @@ Validity checks
   placebo cutoff 74.5: +0.96 (se 0.71); p = 0.178
   placebo cutoff 84.5: -0.35 (se 0.58); p = 0.547
   placebo cutoff 94.5: -0.20 (se 0.50); p = 0.686
+
+rdrobust: MSE-optimal bandwidth, triangular kernel, local linear, clustered by property
+  cutoff 80: h = 6.68; conventional +0.02; bias-corrected -0.06; robust 95% CI -1.20 to +1.08; robust p = 0.9155
+  rddensity at 80: t = +2.34, p = 0.0194
+  cutoff 90: h = 1.90; conventional -0.68; bias-corrected -0.99; robust 95% CI -2.67 to +0.70; robust p = 0.2522
+  rddensity at 90: t = -0.42, p = 0.6737
