@@ -1,0 +1,21 @@
+BUNCHING RESULTS (dry-run)
+========================================
+NSPIRE MF: n in window 7,212; excess at 59 = 428 (se 22); missing in 60-70 = 326 (se 128); difference = 102 (se 134, z = +0.76); excess ratio 19.71
+UPCS 2013-2019 MF (no unit-threshold rule; comparison): n in window 21,413; excess at 59 = -5 (se 20); missing in 60-70 = 38 (se 285); difference = -43 (se 302, z = -0.14); excess ratio -0.05
+NSPIRE PH: n in window 1,455; excess at 59 = 82 (se 9); missing in 60-70 = 55 (se 36); difference = 27 (se 40, z = +0.68); excess ratio 16.42
+UPCS 2013-2019 PH (no unit-threshold rule; comparison): n in window 6,186; excess at 59 = -1 (se 11); missing in 60-70 = 108 (se 162); difference = -110 (se 171, z = -0.64); excess ratio -0.05
+NSPIRE MF, order 4, excluded 55-72: excess 428; missing 230; difference 198 (se 207)
+NSPIRE MF, order 6, excluded 55-72: excess 415; missing 724; difference -308 (se 1011)
+NSPIRE MF, order 5, excluded 53-74: excess 434; missing 198; difference 236 (se 215)
+NSPIRE MF, order 5, excluded 56-71: excess 426; missing 368; difference 59 (se 110)
+NSPIRE PH, order 4, excluded 55-72: excess 82; missing 48; difference 34 (se 52)
+NSPIRE PH, order 6, excluded 55-72: excess 79; missing 140; difference -62 (se 239)
+NSPIRE PH, order 5, excluded 53-74: excess 81; missing 76; difference 5 (se 79)
+NSPIRE PH, order 5, excluded 56-71: excess 84; missing 12; difference 72 (se 23)
+History sample 2001-2005, density at 59.5: log ratio +0.202 (se 0.065, z = +3.14)
+UPCS 2013-2019 MF, threshold 60: observed 171 in [58,59] and 224 in [60,61]; counterfactual 156 and 221
+UPCS 2013-2019 MF, threshold 80: observed 2,357 in [78,79] and 2,954 in [80,81]; counterfactual 2309 and 2941
+UPCS 2013-2019 MF, threshold 90: observed 6,548 in [88,89] and 7,525 in [90,91]; counterfactual 7311 and 7723
+UPCS 2013-2019 PH, threshold 60: observed 46 in [58,59] and 71 in [60,61]; counterfactual 47 and 66
+UPCS 2013-2019 PH, threshold 80: observed 699 in [78,79] and 787 in [80,81]; counterfactual 691 and 868
+UPCS 2013-2019 PH, threshold 90: observed 1,842 in [88,89] and 2,216 in [90,91]; counterfactual 2117 and 2234

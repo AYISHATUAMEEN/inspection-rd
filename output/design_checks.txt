@@ -1,0 +1,92 @@
+DESIGN CHECKS (pre-registration; no outcome contrasts)
+======================================================
+History-file multifamily inspections: 105,471; properties: 32,209
+Index inspections 2001-01-08 to 2005-12-31: 54,915; properties: 28,936
+  with a next inspection listed: 50,317 (91.6%)
+  score decimals: 97.5% of index scores are non-integer (continuous running variable)
+
+1. Observations near each cutoff (index inspections)
+   cutoff 80 (c = 79.5): h=2: 2,204 below / 2,565 above; h=3: 3,261 below / 3,850 above; h=5: 5,189 below / 6,593 above; h=8: 7,753 below / 10,944 above; h=10: 9,307 below / 14,208 above
+   cutoff 90 (c = 89.5): h=2: 3,263 below / 3,526 above; h=3: 4,770 below / 5,330 above; h=5: 7,615 below / 9,109 above; h=8: 11,649 below / 15,048 above; h=10: 14,192 below / 19,152 above
+   cutoff 60 (c = 59.5): h=2: 657 below / 905 above; h=3: 979 below / 1,375 above; h=5: 1,516 below / 2,426 above; h=8: 2,197 below / 4,208 above; h=10: 2,612 below / 5,602 above
+
+2. Running-variable density at each cutoff (log ratio above/below; local linear on 0.5-point bins, h = 6)
+   cutoff 80: log ratio +0.056 (se 0.037, z = +1.53); implied excess above = +5.7%
+   cutoff 90: log ratio +0.001 (se 0.031, z = +0.04); implied excess above = +0.1%
+   cutoff 60: log ratio +0.202 (se 0.065, z = +3.14); implied excess above = +22.4%
+   Counts in 0.5-point bins, 77.0 to 82.0 and 87.0 to 92.0:
+     [77.0) 523  [77.5) 532  [78.0) 534  [78.5) 552  [79.0) 586  [79.5) 589  [80.0) 640  [80.5) 683  [81.0) 631  [81.5) 620
+     [87.0) 730  [87.5) 783  [88.0) 799  [88.5) 814  [89.0) 867  [89.5) 852  [90.0) 896  [90.5) 859  [91.0) 897  [91.5) 919
+
+3. First stage: years to the next listed inspection (treatment), by rounded index score
+   score 70: n=  702  mean 1.30  median 1.09
+   score 71: n=  769  mean 1.29  median 1.08
+   score 72: n=  784  mean 1.29  median 1.07
+   score 73: n=  766  mean 1.29  median 1.07
+   score 74: n=  874  mean 1.27  median 1.06
+   score 75: n=  887  mean 1.27  median 1.06
+   score 76: n=  947  mean 1.29  median 1.08
+   score 77: n= 1008  mean 1.26  median 1.07
+   score 78: n= 1014  mean 1.27  median 1.07
+   score 79: n= 1090  mean 1.28  median 1.07
+   score 80: n= 1127  mean 2.36  median 2.14
+   score 81: n= 1218  mean 2.40  median 2.16
+   score 82: n= 1179  mean 2.35  median 2.14
+   score 83: n= 1257  mean 2.44  median 2.20
+   score 84: n= 1251  mean 2.39  median 2.16
+   score 85: n= 1285  mean 2.39  median 2.16
+   score 86: n= 1337  mean 2.39  median 2.17
+   score 87: n= 1395  mean 2.37  median 2.15
+   score 88: n= 1451  mean 2.37  median 2.16
+   score 89: n= 1563  mean 2.39  median 2.15
+   score 90: n= 1550  mean 3.37  median 3.15
+   score 91: n= 1571  mean 3.44  median 3.20
+   score 92: n= 1616  mean 3.42  median 3.18
+   score 93: n= 1651  mean 3.41  median 3.18
+   score 94: n= 1752  mean 3.44  median 3.21
+   score 95: n= 1759  mean 3.44  median 3.21
+   score 96: n= 1819  mean 3.44  median 3.19
+   score 97: n= 1813  mean 3.48  median 3.22
+   score 98: n= 1839  mean 3.52  median 3.29
+   score 99: n= 1896  mean 3.49  median 3.24
+   Local-linear jump in years to next inspection (triangular kernel, clustered by property):
+     cutoff 80, h=3: +1.087 years (se 0.030); n = 6,645; mean just below 1.28
+     cutoff 80, h=5: +1.084 years (se 0.024); n = 10,993; mean just below 1.28
+     cutoff 80, h=8: +1.099 years (se 0.019); n = 17,432; mean just below 1.28
+     cutoff 80, h=5: jump in P(interval > 1.5 y) = +0.792 (se 0.012); just below 0.205
+     cutoff 90, h=3: +0.961 years (se 0.029); n = 9,164; mean just below 2.40
+     cutoff 90, h=5: +0.994 years (se 0.022); n = 15,183; mean just below 2.39
+     cutoff 90, h=8: +1.013 years (se 0.017); n = 24,264; mean just below 2.38
+     cutoff 90, h=5: jump in P(interval > 2.5 y) = +0.696 (se 0.012); just below 0.301
+
+4. Power (outcome variance only; no outcome contrast across the cutoff)
+   residual SD of next score around a quartic in the index score: 13.50 points
+   cutoff 80, h=3: simulated SE of the reduced-form jump 0.75; minimum detectable effect (80% power, 5% two-sided) 2.09 points
+   cutoff 80, h=5: simulated SE of the reduced-form jump 0.54; minimum detectable effect (80% power, 5% two-sided) 1.50 points
+   cutoff 80, h=8: simulated SE of the reduced-form jump 0.45; minimum detectable effect (80% power, 5% two-sided) 1.25 points
+   cutoff 90, h=3: simulated SE of the reduced-form jump 0.67; minimum detectable effect (80% power, 5% two-sided) 1.87 points
+   cutoff 90, h=5: simulated SE of the reduced-form jump 0.50; minimum detectable effect (80% power, 5% two-sided) 1.39 points
+   cutoff 90, h=8: simulated SE of the reduced-form jump 0.36; minimum detectable effect (80% power, 5% two-sided) 1.00 points
+
+4b. Attrition: jump in P(next inspection listed) at each cutoff, by last index date (h = 5)
+   index <= 2005-12-31 (n = 54,915): cutoff 80: -0.035 (se 0.010), just below 0.957; cutoff 90: -0.040 (se 0.010), just below 0.928
+   index <= 2005-06-30 (n = 51,671): cutoff 80: -0.030 (se 0.010), just below 0.954; cutoff 90: -0.040 (se 0.010), just below 0.931
+   index <= 2004-12-31 (n = 47,072): cutoff 80: -0.028 (se 0.011), just below 0.953; cutoff 90: -0.035 (se 0.010), just below 0.930
+   index <= 2004-06-30 (n = 40,650): cutoff 80: -0.030 (se 0.011), just below 0.953; cutoff 90: -0.037 (se 0.011), just below 0.932
+   index <= 2003-12-31 (n = 37,733): cutoff 80: -0.030 (se 0.012), just below 0.954; cutoff 90: -0.040 (se 0.011), just below 0.933
+   Among index inspections without a next listing, share whose property is absent from all later HUD files:
+     87.2% of 4,598
+
+4c. Predetermined covariates: jump at each cutoff (h = 5)
+   prev_score_hist: cutoff 80: -0.632 (se 0.720); cutoff 90: +0.566 (se 0.609)
+   seq_hist: cutoff 80: -0.040 (se 0.041); cutoff 90: -0.006 (se 0.030)
+   index_year: cutoff 80: -0.026 (se 0.055); cutoff 90: +0.039 (se 0.045)
+   index_month: cutoff 80: +0.130 (se 0.128); cutoff 90: +0.059 (se 0.106)
+
+5. Later-era samples (integer scores; next inspection only partly observed)
+   MF UPCS 2013-2019: n=69,942; at 59: 257; at 60: 429; 79: 1,191; 80: 1,647; 89: 2,479; 90: 2,637
+   MF NSPIRE: n=23,992; at 59: 375; at 60: 10; 79: 253; 80: 371; 89: 777; 90: 974
+   PH UPCS 2013-2019: n=20,083; at 59: 138; at 60: 168; 79: 358; 80: 493; 89: 614; 90: 735
+   PH NSPIRE: n=4,942; at 59: 300; at 60: 2; 79: 97; 80: 133; 89: 159; 90: 179
+
+Latest inspection date in AHCP v1.0: 2026-04-03 (no inspections on or after 2026-10-01 are available yet)
