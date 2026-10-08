@@ -1,0 +1,26 @@
+\begin{tabular}{lcc}
+\toprule
+& 80 cutoff & 90 cutoff \\
+\midrule
+Primary: local linear, $h=5$ & $-$0.66 & $-$0.33 \\
+ & (0.58) & (0.46) \\
+Bandwidth $h=3$ & $-$0.25 & $-$0.18 \\
+ & (0.75) & (0.58) \\
+Bandwidth $h=8$ & $-$1.37 & $-$0.72 \\
+ & (0.46) & (0.37) \\
+Local quadratic, $h=8$ & $-$0.13 & $-$0.21 \\
+ & (0.67) & (0.53) \\
+Donut, $|x-c|\geq0.5$ & $-$0.96 & $-$0.32 \\
+ & (0.73) & (0.59) \\
+Donut, $|x-c|\geq1$ & $-$1.56 & $-$0.22 \\
+ & (0.96) & (0.78) \\
+Excluding first listed inspection & $-$0.62 & $-$0.65 \\
+ & (0.72) & (0.63) \\
+\texttt{rdrobust}, bias-corrected & $-$0.10 & $-$0.02 \\
+\quad robust 95\% CI; MSE-optimal $h$ & [$-$1.62, 1.42]; 3.69 & [$-$1.28, 1.25]; 3.36 \\
+Trimming bounds (attrition) & [$-$2.28, +0.10] & [$-$1.88, +0.40] \\
+\midrule
+Observations, primary & 10,993 & 15,183 \\
+First stage (years), primary & 1.08 (0.024) & 0.99 (0.022) \\
+\bottomrule
+\end{tabular}
